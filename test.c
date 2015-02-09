@@ -31,6 +31,15 @@ struct testcase testcases[] = {
             {7, 1},
             {19, -1}
         })
+    },
+
+    {
+        .bucket_size = 2,
+        RESULTS({0, 1, 0, 1}),
+        VALUES({
+            {7, 0},
+            {19, 0}
+        })
     }
 };
 

@@ -26,6 +26,11 @@ void histogram_read_value(struct histogram *hist, long time, float value) {
 	int bucket_i = bucket % num_buckets;
 	int i;
 
+	if (value == 0) {
+		hist->values[bucket_i]++;
+		return;
+	}
+
 	for (i = bucket_i; i < num_buckets; i++) {
 		hist->values[i] += value;
 	}
