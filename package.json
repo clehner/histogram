@@ -1,0 +1,9 @@
+{
+	"name": "histogram",
+	"version": "0.0.1",
+	"repo": "clehner/histogram",
+	"description": "calculate histograms",
+	"keywords": ["histogram", "chart", "stats", "statistics"],
+	"license": "MIT",
+	"install": "make install"
+}
