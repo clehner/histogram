@@ -1,13 +1,8 @@
 #include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 
 #include "histogram.h"
 
 #define ARRAY_SIZE(a) (sizeof((a)) / sizeof((a)[0]))
-#define ABS(a) (((a) < 0) ? -(a) : (a))
 
 struct event {
     long time;
@@ -22,18 +17,20 @@ struct testcase {
     float *results;
 };
 
+#define VALS(...) __VA_ARGS__
+#define RESULTS(...) .results = (float[])__VA_ARGS__,\
+    .num_buckets = ARRAY_SIZE((float[])VALS(__VA_ARGS__))
+#define VALUES(...) .values = (struct event[])VALS(__VA_ARGS__),\
+    .num_values = ARRAY_SIZE((struct event[])VALS(__VA_ARGS__))
+
 struct testcase testcases[] = {
     {
-        .num_buckets = 4,
         .bucket_size = 2,
-        .num_values = 2,
-        .values = (struct event[]){
+        RESULTS({2, 1, 1, 2}),
+        VALUES({
             {7, 1},
             {19, -1}
-        },
-        .results = (float[]){
-            2, 1, 1, 2
-        }
+        })
     }
 };
 
@@ -57,7 +54,7 @@ int main()
         float value;
         histogram_read_results(hist, time, value)
             // printf("%d %f, %f\n", time, value, tcase->results[time]);
-            assert(ABS(tcase->results[time] - value) < 0.01);
+            assert(tcase->results[time] == value);
     }
 
 	return 0;

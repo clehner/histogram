@@ -5,11 +5,11 @@ PREFIX ?= /usr/local
 
 CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic
 
+all: $(BIN) test
+
 test: histogram.o test.o
 	$(CC) $(CFLAGS) -o $@ $^
 	./test
-
-all: $(BIN)
 
 histogram: histogram.o main.o
 
@@ -20,6 +20,6 @@ uninstall:
 	rm $(PREFIX)/bin/$(BIN)
 
 clean:
-	rm -f $(BIN) $(OBJ)
+	rm -f test $(BIN) $(OBJ)
 
 .PHONY: clean install uninstall
