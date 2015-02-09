@@ -17,21 +17,20 @@ int main(int argc, char *argv[])
 	struct histogram *hist = histogram_new(num_buckets, bucket_size);
 	if (!hist) return 1;
 
-	char type;
 	long time;
 	float value;
 
 	while (!feof(stdin)) {
-		if (scanf("%hhd %ld %f\n", type, time, value) != 3) {
+		if (scanf("%ld %f\n", &time, &value) != 2) {
 			fprintf(stderr, "%s: invalid input\n", argv[0]);
 			return 1;
 		}
 
-		histogram_read_value(hist, type, time, value);
+		histogram_read_value(hist, time, value);
 	}
 
 	histogram_read_results(hist, time, value) {
-		printf("%d %f\n", time, value);
+		printf("%ld %f\n", time, value);
 	}
 
 	return 0;
