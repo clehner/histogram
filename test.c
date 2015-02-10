@@ -26,19 +26,23 @@ struct testcase {
 struct testcase testcases[] = {
 	{
 		.bucket_size = 2,
-		RESULTS({2, 1, 1, 2}),
+		RESULTS({1.5, 1.25, 1.25, 1.5}),
 		VALUES({
+			{0, 1},
 			{7, 1},
-			{19, -1}
+			{19, -1},
+			{32, -1},
 		})
 	},
 
 	{
 		.bucket_size = 2,
-		RESULTS({0, 1, 0, 1}),
+		RESULTS({0.5, 1, 0, 1}),
 		VALUES({
+			{6, 0},
 			{7, 0},
-			{19, 0}
+			{19, 0},
+			{16, 0},
 		})
 	}
 };
@@ -57,6 +61,8 @@ int main()
 			struct event *event = &tcase->values[j];
 			histogram_read_value(hist, event->time, event->value);
 		}
+
+		histogram_done(hist);
 
 		/* check histogram results */
 		unsigned int time;

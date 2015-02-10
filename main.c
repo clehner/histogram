@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
 		histogram_read_value(hist, time, value);
 	}
 
+	histogram_done(hist);
+
 	histogram_read_results(hist, time, value) {
 		printf("%f\n", value);
 	}
