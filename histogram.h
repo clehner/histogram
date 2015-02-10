@@ -2,15 +2,15 @@
 #define __HISTOGRAM_H
 
 struct histogram {
-	int num_buckets;
-	int bucket_size;
-	float value_all;
-	float values[];
+	unsigned int num_buckets;
+	unsigned int bucket_size;
+	double value_all;
+	double values[];
 };
 
 struct histogram *histogram_new(int, int);
 void histogram_free(struct histogram *);
-void histogram_read_value(struct histogram *, long, float);
+void histogram_read_value(struct histogram *, long, double);
 
 #define after(x) if (x, 1)
 

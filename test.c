@@ -6,7 +6,7 @@
 
 struct event {
     long time;
-    float value;
+    double value;
 };
 
 struct testcase {
@@ -14,12 +14,12 @@ struct testcase {
     int bucket_size;
     int num_values;
     struct event *values;
-    float *results;
+    double *results;
 };
 
 #define VALS(...) __VA_ARGS__
-#define RESULTS(...) .results = (float[])__VA_ARGS__,\
-    .num_buckets = ARRAY_SIZE((float[])VALS(__VA_ARGS__))
+#define RESULTS(...) .results = (double[])__VA_ARGS__,\
+    .num_buckets = ARRAY_SIZE((double[])VALS(__VA_ARGS__))
 #define VALUES(...) .values = (struct event[])VALS(__VA_ARGS__),\
     .num_values = ARRAY_SIZE((struct event[])VALS(__VA_ARGS__))
 
@@ -59,7 +59,7 @@ int main()
         }
 
         /* check histogram results */
-        int time;
+        unsigned int time;
         float value;
         histogram_read_results(hist, time, value)
             // printf("%d %f, %f\n", time, value, tcase->results[time]);

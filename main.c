@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
 	if (!hist) return 1;
 
 	long time;
-	float value;
+	double value;
 
 	while (!feof(stdin)) {
-		if (scanf("%ld %f\n", &time, &value) != 2) {
+		if (scanf("%ld %lf\n", &time, &value) != 2) {
 			fprintf(stderr, "%s: invalid input\n", argv[0]);
 			return 1;
 		}
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	}
 
 	histogram_read_results(hist, time, value) {
-		printf("%ld %f\n", time, value);
+		printf("%f\n", value);
 	}
 
 	return 0;

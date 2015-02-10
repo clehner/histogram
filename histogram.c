@@ -19,7 +19,7 @@ histogram_free(struct histogram *hist)
 	free(hist);
 }
 
-void histogram_read_value(struct histogram *hist, long time, float value) {
+void histogram_read_value(struct histogram *hist, long time, double value) {
 	int bucket_offset = time % hist->bucket_size;
 	int bucket = (time - bucket_offset) / hist->bucket_size;
 	int num_buckets = hist->num_buckets;
